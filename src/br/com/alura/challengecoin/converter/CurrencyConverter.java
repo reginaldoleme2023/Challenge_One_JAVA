@@ -11,15 +11,15 @@ import java.util.Map;
 public class CurrencyConverter {
 
     public double converterCurrency(double coinValue, int option) {
-        double convertedValue = 0;
+        double convertedValue;
         String typeSearch = selectTypeSearch(option);
         Coin quote = searchQuote(typeSearch);
         Map<String, Double> conversionRates = quote.getConversion_rates();
-
-        if(option == 1){
-            double  valueRate = conversionRates.getOrDefault("BRL", -1.0);
-            convertedValue = coinValue/valueRate;
-
+        double  valueRate = conversionRates.getOrDefault("BRL", -1.0);
+        if(option == 1 || option == 3 || option == 5){
+           convertedValue = coinValue/valueRate;
+        }else{
+           convertedValue = coinValue*valueRate;
         }
 
       return  convertedValue;
